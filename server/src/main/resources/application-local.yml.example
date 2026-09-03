@@ -1,0 +1,12 @@
+# 本地开发环境配置模板
+# 复制为 application-local.yml 并填入真实值后，用以下方式启动：
+#   mvn spring-boot:run -Dspring.profiles.active=local
+# 或设置环境变量 SPRING_PROFILES_ACTIVE=local
+
+spring:
+  datasource:
+    password: your_mysql_password
+
+casdoor:
+  client-id: your_casdoor_client_id
+  client-secret: your_casdoor_client_secret

@@ -1,0 +1,33 @@
+# 编辑器
+.idea/
+.vscode/
+*.iml
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 后端
+server/target/
+server/.mvn/
+server/mvnw
+server/mvnw.cmd
+*.log
+server/src/main/resources/application-local.yml
+
+# 前端
+web/node_modules/
+web/dist/
+web/.vite/
+web/.env
+web/.env.local
+web/.env.*.local
+
+# 密钥/本地配置
+*.local
+
+# MCP 本地配置（含数据库密码，勿提交）
+.mcp.json
+
+# Claude Code 本地配置
+.claude/

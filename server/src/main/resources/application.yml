@@ -1,0 +1,47 @@
+server:
+  port: 13001
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: wait-server
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/wait?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # 用 Casdoor 的 OIDC discovery 文档自动发现 jwks_uri、issuer
+          issuer-uri: http://127.0.0.1:18000
+          jwk-set-uri: http://127.0.0.1:18000/.well-known/jwks
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.wait.server.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: AUTO
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+casdoor:
+  endpoint: http://127.0.0.1:18000
+  client-id: ${CASDOOR_CLIENT_ID:}
+  client-secret: ${CASDOOR_CLIENT_SECRET:}
+  organization: wait
+  application-name: wait
+
+logging:
+  level:
+    com.wait: DEBUG
+    org.springframework.security: DEBUG
