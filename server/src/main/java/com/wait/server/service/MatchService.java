@@ -2,9 +2,11 @@ package com.wait.server.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wait.server.dto.MatchCandidateVO;
+import com.wait.server.entity.RegionEntity;
 import com.wait.server.entity.UserEntity;
 import com.wait.server.entity.UserProfileEntity;
 import com.wait.server.exception.BusinessException;
+import com.wait.server.mapper.RegionMapper;
 import com.wait.server.util.JsonUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class MatchService {
     private final UserService userService;
     private final UserProfileService userProfileService;
     private final ConversationService conversationService;
+    private final RegionMapper regionMapper;
 
     public List<MatchCandidateVO> candidates(Long meId, BigDecimal lng, BigDecimal lat, Double radiusKm) {
         UserEntity me = userService.getById(meId);
@@ -200,8 +203,9 @@ public class MatchService {
         m.put("age", p.getAge());
         m.put("height", p.getHeight());
         m.put("education", p.getEducation());
-        m.put("city", p.getCity());
-        m.put("district", p.getDistrict());
+        m.put("cityCode", p.getCityCode());
+        m.put("districtCode", p.getDistrictCode());
+        m.put("provinceCode", p.getProvinceCode());
         m.put("profession", p.getProfession());
         return m;
     }
@@ -212,6 +216,12 @@ public class MatchService {
         try { return Integer.parseInt(String.valueOf(o)); } catch (Exception e) { return null; }
     }
 
+    private String regionName(String code) {
+        if (code == null || code.isBlank()) return null;
+        RegionEntity r = regionMapper.selectById(code);
+        return r == null ? null : r.getName();
+    }
+
     private MatchCandidateVO toVO(UserEntity u, UserProfileEntity p) {
         MatchCandidateVO vo = new MatchCandidateVO();
         vo.setUserId(u.getId());
@@ -219,8 +229,12 @@ public class MatchService {
         vo.setAvatar(u.getAvatar());
         vo.setGender(u.getGender());
         vo.setAge(p.getAge());
-        vo.setCity(p.getCity());
-        vo.setDistrict(p.getDistrict());
+        vo.setProvinceCode(p.getProvinceCode());
+        vo.setProvinceName(regionName(p.getProvinceCode()));
+        vo.setCityCode(p.getCityCode());
+        vo.setCityName(regionName(p.getCityCode()));
+        vo.setDistrictCode(p.getDistrictCode());
+        vo.setDistrictName(regionName(p.getDistrictCode()));
         vo.setProfession(p.getProfession());
         vo.setHeight(p.getHeight());
         vo.setEducation(p.getEducation());

@@ -15,8 +15,12 @@ public class ProfileVO {
     private String realName;
     private Integer age;
     private LocalDate birthday;
-    private String city;
-    private String district;
+    private String provinceCode;
+    private String provinceName;
+    private String cityCode;
+    private String cityName;
+    private String districtCode;
+    private String districtName;
     private String profession;
     private Integer height;
     private String education;

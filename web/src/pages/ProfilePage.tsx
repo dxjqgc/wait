@@ -8,6 +8,7 @@ import {
   type UpdateProfileDTO,
 } from '../api/profile';
 import { Avatar } from '../components/Avatar';
+import { RegionCascader } from '../components/RegionCascader';
 
 const EDUCATION_OPTIONS = ['', '高中', '大专', '本科', '硕士', '博士'];
 
@@ -15,7 +16,10 @@ function empty(): ProfileVO {
   return {
     userId: 0, nickname: '', avatar: '', gender: 0,
     realName: '', age: undefined, birthday: '',
-    city: '', district: '', profession: '',
+    provinceCode: '', provinceName: '',
+    cityCode: '', cityName: '',
+    districtCode: '', districtName: '',
+    profession: '',
     height: undefined, education: '',
     personality: [], appearances: [], hobbies: [], tags: [],
     requirementPreset: {}, requirementCustom: [],
@@ -53,8 +57,9 @@ export default function ProfilePage() {
         realName: p.realName,
         age: p.age,
         birthday: p.birthday,
-        city: p.city,
-        district: p.district,
+        provinceCode: p.provinceCode,
+        cityCode: p.cityCode,
+        districtCode: p.districtCode,
         profession: p.profession,
         height: p.height,
         education: p.education,
@@ -150,18 +155,12 @@ export default function ProfilePage() {
           {/* 基础信息 */}
           <section className="surface p-5">
             <h3 className="text-xs text-white/40 mb-3 uppercase tracking-wide">基础信息</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mb-4">
               <Field label="真实姓名">
                 <input value={p.realName ?? ''} onChange={(e) => patch('realName', e.target.value)} className="input" />
               </Field>
               <Field label="生日">
                 <input type="date" value={p.birthday ?? ''} onChange={(e) => patch('birthday', e.target.value)} className="input" />
-              </Field>
-              <Field label="城市">
-                <input value={p.city ?? ''} onChange={(e) => patch('city', e.target.value)} className="input" />
-              </Field>
-              <Field label="区县">
-                <input value={p.district ?? ''} onChange={(e) => patch('district', e.target.value)} className="input" />
               </Field>
               <Field label="职业">
                 <input value={p.profession ?? ''} onChange={(e) => patch('profession', e.target.value)} className="input" />
@@ -179,6 +178,15 @@ export default function ProfilePage() {
               <Field label="年龄（自动按生日，可手填）">
                 <input type="number" value={p.age ?? ''} onChange={(e) => patch('age', e.target.value ? Number(e.target.value) : undefined)} className="input" />
               </Field>
+            </div>
+            <div className="mb-1">
+              <label className="block text-xs text-white/40 mb-1">常住地</label>
+              <RegionCascader
+                provinceCode={p.provinceCode ?? undefined}
+                cityCode={p.cityCode ?? undefined}
+                districtCode={p.districtCode ?? undefined}
+                onChange={(next) => setP((cur) => (cur ? { ...cur, ...next } : cur))}
+              />
             </div>
           </section>
 

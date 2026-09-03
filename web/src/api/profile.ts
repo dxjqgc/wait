@@ -8,8 +8,12 @@ export interface ProfileVO {
   realName: string;
   age: number;
   birthday: string;
-  city: string;
-  district: string;
+  provinceCode: string;
+  provinceName: string;
+  cityCode: string;
+  cityName: string;
+  districtCode: string;
+  districtName: string;
   profession: string;
   height: number;
   education: string;
@@ -29,8 +33,9 @@ export interface UpdateProfileDTO {
   realName?: string;
   age?: number;
   birthday?: string;
-  city?: string;
-  district?: string;
+  provinceCode?: string;
+  cityCode?: string;
+  districtCode?: string;
   profession?: string;
   height?: number;
   education?: string;

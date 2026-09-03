@@ -25,9 +25,12 @@ public class UserProfileEntity {
 
     private LocalDate birthday;
 
-    private String city;
+    /** 省/市/区县的行政区划代码（VARCHAR(6)） */
+    private String provinceCode;
 
-    private String district;
+    private String cityCode;
+
+    private String districtCode;
 
     private String profession;
 

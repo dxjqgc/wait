@@ -18,8 +18,9 @@ public class UpdateProfileDTO {
     private String realName;
     private Integer age;
     private LocalDate birthday;
-    private String city;
-    private String district;
+    private String provinceCode;
+    private String cityCode;
+    private String districtCode;
     private String profession;
     private Integer height;
     private String education;

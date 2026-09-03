@@ -90,7 +90,7 @@ export default function MatchListPage() {
                       )}
                     </div>
                     <div className="text-sm text-white/50 mt-0.5 truncate">
-                      {c.city} {c.district} · {c.profession || '职业未填'} · {c.education || '学历未填'}
+                      {[c.provinceName, c.cityName, c.districtName].filter(Boolean).join(' ') || '常住地未填'} · {c.profession || '职业未填'} · {c.education || '学历未填'}
                     </div>
                     <div className="flex flex-wrap gap-1 mt-1.5">
                       {[...(c.hobbies ?? []), ...(c.tags ?? [])].slice(0, 5).map((t) => (

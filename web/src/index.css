@@ -33,6 +33,11 @@ input, textarea, select {
   font-family: inherit;
 }
 
+select, select option {
+  color: #fff;
+  background-color: #1c1c1c;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

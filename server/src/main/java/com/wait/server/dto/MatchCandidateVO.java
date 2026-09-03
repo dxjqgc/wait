@@ -12,8 +12,12 @@ public class MatchCandidateVO {
     private String avatar;
     private Integer gender;
     private Integer age;
-    private String city;
-    private String district;
+    private String provinceCode;
+    private String provinceName;
+    private String cityCode;
+    private String cityName;
+    private String districtCode;
+    private String districtName;
     private String profession;
     private Integer height;
     private String education;

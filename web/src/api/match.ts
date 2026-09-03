@@ -6,8 +6,12 @@ export interface MatchCandidate {
   avatar: string;
   gender: number;
   age: number;
-  city: string;
-  district: string;
+  provinceCode: string;
+  provinceName: string;
+  cityCode: string;
+  cityName: string;
+  districtCode: string;
+  districtName: string;
   profession: string;
   height: number;
   education: string;
